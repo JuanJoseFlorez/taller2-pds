@@ -1,0 +1,10 @@
+server:
+  servlet:
+    context-path: /api/v3/poli
+  port: 9080
+spring:
+  application:
+    name: taller
+  profiles:
+    active: dev
+
