@@ -2,10 +2,12 @@ package edu.co.poli.movies.service;
 
 import edu.co.poli.movies.clientFeign.BookingsClient;
 import edu.co.poli.movies.clientFeign.ShowtimesClient;
+import edu.co.poli.movies.helper.Response;
 import edu.co.poli.movies.model.Booking;
 import edu.co.poli.movies.model.Showtime;
 import edu.co.poli.movies.persistence.entity.Movie;
 import edu.co.poli.movies.persistence.repository.MovieRepository;
+import edu.co.poli.movies.service.dto.MovieInDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -23,9 +25,9 @@ public class MovieServiceImpl implements MovieService{
 
 
     @Override
-    public Movie save(Movie movie) {
-        movieRepository.save(movie);
-        return movie;
+    public Movie save(MovieInDTO movie) {
+        ModelMapper modelMapper = new ModelMapper();
+        return movieRepository.save(modelMapper.map(movie, Movie.class));
     }
 
     @Override

@@ -1,8 +1,12 @@
 package edu.co.poli.users.service;
 
+import edu.co.poli.users.clientFeign.BookingsClient;
+import edu.co.poli.users.model.Booking;
 import edu.co.poli.users.persistence.entity.User;
 import edu.co.poli.users.persistence.repository.UserRepository;
+import edu.co.poli.users.service.dto.UserInDTO;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,18 +16,23 @@ import java.util.List;
 public class UserServiceImple implements UserService{
 
     private final UserRepository userRepository;
+    private final BookingsClient bookingsClient;
 
     @Override
-    public User save(User user) {
-        userRepository.save(user);
-
-        return user;
+    public User save(UserInDTO user) {
+        ModelMapper modelMapper = new ModelMapper();
+        return userRepository.save(modelMapper.map(user, User.class));
     }
 
     @Override
-    public void delete(User user) {
-        userRepository.delete(user);
-
+    public String delete(User user) {
+        List<Booking> booking= bookingsClient.findByUserId(user.getId());
+        System.out.println(booking);
+        if(booking==null||booking.isEmpty()){
+            userRepository.delete(user);
+            return "Eliminado correctamente";
+        }
+        return "Este usuario tiene reservas asociadas";
     }
 
     @Override
