@@ -2,6 +2,9 @@ package edu.co.poli.movies.persistence.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +18,17 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(nullable = false, unique = true)
     private Long id;
+
+    @NotBlank(message = "Title no puede estar en blanco")
     private String title;
+
+    @NotBlank(message = "Director no puede estar en blanco")
     private String director;
+
+    @Min(value = 1, message = "Rating debe ser un valor entre 1 y 5")
+    @Max(value = 5, message = "Rating debe ser un valor entre 1 y 5")
     private int rating;
 
     @Override
