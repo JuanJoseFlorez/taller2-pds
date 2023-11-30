@@ -22,12 +22,8 @@ public class Booking {
     private Long id;
     @NotNull(message = "UserId no puede ser nulo")
     private Long userid;
-
     @NotNull(message = "ShowtimeId no puede ser nulo")
     private Long showtimeid;
-    //@OneToMany(mappedBy = "bookings", cascade = CascadeType.ALL)
-    //@Transient
-    //private List<Movies> movies;
     @ElementCollection
     private List<Long> movies;
 

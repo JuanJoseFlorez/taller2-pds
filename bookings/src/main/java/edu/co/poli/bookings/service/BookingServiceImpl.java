@@ -2,7 +2,9 @@ package edu.co.poli.bookings.service;
 
 import edu.co.poli.bookings.persistence.entity.Booking;
 import edu.co.poli.bookings.persistence.repository.BookingRepository;
+import edu.co.poli.bookings.service.dto.BookingInDTO;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,16 +17,14 @@ public class BookingServiceImpl implements BookingService{
 
 
     @Override
-    public Booking save(Booking booking) {
-        bookingRepository.save(booking);
-
-        return booking;
+    public Booking save(BookingInDTO booking) {
+        ModelMapper modelMapper = new ModelMapper();
+        return bookingRepository.save(modelMapper.map(booking, Booking.class));
     }
 
     @Override
     public void delete(Booking booking) {
         bookingRepository.delete(booking);
-
     }
 
     @Override
@@ -36,5 +36,10 @@ public class BookingServiceImpl implements BookingService{
     @Override
     public Booking findById(Long id) {
         return bookingRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Booking> findByUserId(Long id) {
+        return bookingRepository.findByUserId(id);
     }
 }
