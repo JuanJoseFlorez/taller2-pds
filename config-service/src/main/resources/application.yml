@@ -1,0 +1,15 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          #uri: file:///C:/Users/juanj/Documents/Profundizacion desarrollo/taller2-pds-config
+          uri: https://github.com/JuanJoseFlorez/taller2-pds-config
+  security:
+    user:
+      name: ${CONFIG_NAME}
+      password: ${CONFIG_PASSWORD}
