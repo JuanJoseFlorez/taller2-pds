@@ -1,10 +1,14 @@
 package edu.co.poli.bookings.persistence.entity;
 
 
+import edu.co.poli.bookings.model.Movies;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -14,10 +18,19 @@ import java.util.Objects;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
+    @NotNull(message = "UserId no puede ser nulo")
+    private Long userid;
+
+    @NotNull(message = "ShowtimeId no puede ser nulo")
     private Long showtimeid;
-    private Long movies;
+    //@OneToMany(mappedBy = "bookings", cascade = CascadeType.ALL)
+    //@Transient
+    //private List<Movies> movies;
+    @ElementCollection
+    private List<Long> movies;
+
 
 
     @Override

@@ -33,8 +33,8 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id) {
         Movie customer = movieService.findById(id);
-        movieService.delete(customer);
+        return movieService.delete(customer);
     }
 }
