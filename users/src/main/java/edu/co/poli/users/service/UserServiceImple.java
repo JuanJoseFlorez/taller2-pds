@@ -7,8 +7,10 @@ import edu.co.poli.users.persistence.repository.UserRepository;
 import edu.co.poli.users.service.dto.UserInDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,6 +19,7 @@ public class UserServiceImple implements UserService{
 
     private final UserRepository userRepository;
     private final BookingsClient bookingsClient;
+    private final CircuitBreakerFactory cbFactory;
 
     @Override
     public User save(UserInDTO user) {
@@ -26,7 +29,7 @@ public class UserServiceImple implements UserService{
 
     @Override
     public String delete(User user) {
-        List<Booking> booking= bookingsClient.findByUserId(user.getId());
+        List<Booking> booking= FindBookingByUserId(user.getId());
         System.out.println(booking);
         if(booking==null||booking.isEmpty()){
             userRepository.delete(user);
@@ -43,6 +46,11 @@ public class UserServiceImple implements UserService{
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+    public List<Booking> FindBookingByUserId(Long userId){
+        return cbFactory.create("FindBookingByUserId")
+                .run(()->bookingsClient.findByUserId(userId),
+                        e-> Collections.emptyList()  );
     }
 
 

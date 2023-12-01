@@ -10,8 +10,10 @@ import edu.co.poli.movies.persistence.repository.MovieRepository;
 import edu.co.poli.movies.service.dto.MovieInDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ public class MovieServiceImpl implements MovieService{
     private final MovieRepository movieRepository;
     private final BookingsClient bookingsClient;
     private final ShowtimesClient showtimesClient;
-
+    private final CircuitBreakerFactory cbFactory;
 
     @Override
     public Movie save(MovieInDTO movie) {
@@ -32,10 +34,10 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public String delete(Movie movie) {
-        List<Booking> booking= bookingsClient.findAll();
+        List<Booking> booking= findAllBooking();
         boolean existBooking = booking.stream()
                 .anyMatch(bookingItem -> bookingItem.getMovies().contains(movie.getId()));
-        List<Showtime> showtime = showtimesClient.findAll();
+        List<Showtime> showtime = findAllShowtimes();
         boolean existShowtime = showtime.stream()
                 .anyMatch(showtimeItem -> showtimeItem.getMovies().contains(movie.getId()));
         if(!existBooking && !existShowtime){
@@ -53,6 +55,17 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public Movie findById(Long id) {
         return movieRepository.findById(id).orElse(null);
+    }
+
+    public List<Booking> findAllBooking(){
+        return cbFactory.create("findAllBooking")
+                .run(()->bookingsClient.findAll(),
+                        e-> Collections.emptyList()  );
+    }
+    public List<Showtime> findAllShowtimes(){
+        return cbFactory.create("findAllShowtimes")
+                .run(()->showtimesClient.findAll(),
+                        e-> Collections.emptyList()  );
     }
 }
 
