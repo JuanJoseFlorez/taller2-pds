@@ -1,0 +1,14 @@
+edu\co\poli\movies\controller\MovieController.class
+edu\co\poli\movies\persistence\entity\Movie.class
+edu\co\poli\movies\model\Booking.class
+edu\co\poli\movies\service\dto\MovieInDTO.class
+edu\co\poli\movies\clientFeign\BookingsClient.class
+edu\co\poli\movies\persistence\repository\MovieRepository.class
+edu\co\poli\movies\service\MovieServiceImpl.class
+edu\co\poli\movies\MoviesApplication.class
+edu\co\poli\movies\helper\Response.class
+edu\co\poli\movies\helper\Response$ResponseBuilder.class
+edu\co\poli\movies\helper\ResponseBuild.class
+edu\co\poli\movies\service\MovieService.class
+edu\co\poli\movies\clientFeign\ShowtimesClient.class
+edu\co\poli\movies\model\Showtime.class

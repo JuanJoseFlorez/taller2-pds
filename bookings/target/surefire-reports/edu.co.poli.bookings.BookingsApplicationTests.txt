@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: edu.co.poli.bookings.BookingsApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.115 s - in edu.co.poli.bookings.BookingsApplicationTests
