@@ -18,9 +18,30 @@
 	</properties>
 	<dependencies>
 		<dependency>
+<<<<<<< HEAD
 			<groupId>edu.co.poli</groupId>
 			<artifactId>commons-library</artifactId>
 			<version>1.0.0</version>
+=======
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+>>>>>>> 36f273be4e3127d066884341924ca236d93ec6f0
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -32,6 +53,21 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< HEAD
+=======
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>3.1.2</version>
+		</dependency>
+>>>>>>> 36f273be4e3127d066884341924ca236d93ec6f0
 		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-config-client -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -56,6 +92,7 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 			<version>4.0.4</version>
 		</dependency>
+<<<<<<< HEAD
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
@@ -79,6 +116,13 @@
 			<scope>test</scope>
 		</dependency>
 
+=======
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+>>>>>>> 36f273be4e3127d066884341924ca236d93ec6f0
 
 	</dependencies>
 
@@ -103,10 +147,13 @@
 	</build>
 	<repositories>
 		<repository>
+<<<<<<< HEAD
 			<id>repositorio-local</id>
 			<url>file:///C:/Users/juanj/.m2/repository</url>
 		</repository>
 		<repository>
+=======
+>>>>>>> 36f273be4e3127d066884341924ca236d93ec6f0
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
